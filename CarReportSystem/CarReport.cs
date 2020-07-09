@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CarReportSystem {
+
+    [Serializable]  //シリアル化を可能にする
+
     class CarReport {
 
         //日付

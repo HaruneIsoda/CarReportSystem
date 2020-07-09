@@ -52,7 +52,8 @@
             this.btDataOpen = new System.Windows.Forms.Button();
             this.btDataSave = new System.Windows.Forms.Button();
             this.gbMaker = new System.Windows.Forms.GroupBox();
-            this.ofdOpenPictureImage = new System.Windows.Forms.OpenFileDialog();
+            this.ofdOpenData = new System.Windows.Forms.OpenFileDialog();
+            this.sfdSaveData = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReportData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarImage)).BeginInit();
             this.gbMaker.SuspendLayout();
@@ -279,6 +280,7 @@
             // 
             // btDataClear
             // 
+            this.btDataClear.Enabled = false;
             this.btDataClear.Location = new System.Drawing.Point(670, 238);
             this.btDataClear.Name = "btDataClear";
             this.btDataClear.Size = new System.Drawing.Size(75, 23);
@@ -289,6 +291,7 @@
             // 
             // btDataFix
             // 
+            this.btDataFix.Enabled = false;
             this.btDataFix.Location = new System.Drawing.Point(572, 238);
             this.btDataFix.Name = "btDataFix";
             this.btDataFix.Size = new System.Drawing.Size(75, 23);
@@ -315,6 +318,7 @@
             this.btDataOpen.TabIndex = 7;
             this.btDataOpen.Text = "開く";
             this.btDataOpen.UseVisualStyleBackColor = true;
+            this.btDataOpen.Click += new System.EventHandler(this.btDataOpen_Click);
             // 
             // btDataSave
             // 
@@ -324,6 +328,7 @@
             this.btDataSave.TabIndex = 7;
             this.btDataSave.Text = "保存";
             this.btDataSave.UseVisualStyleBackColor = true;
+            this.btDataSave.Click += new System.EventHandler(this.btDataSave_Click);
             // 
             // gbMaker
             // 
@@ -339,9 +344,9 @@
             this.gbMaker.TabIndex = 8;
             this.gbMaker.TabStop = false;
             // 
-            // ofdOpenPictureImage
+            // ofdOpenData
             // 
-            this.ofdOpenPictureImage.FileName = "openFileDialog1";
+            this.ofdOpenData.FileName = "openFileDialog1";
             // 
             // Form1
             // 
@@ -413,7 +418,8 @@
         private System.Windows.Forms.Button btDataOpen;
         private System.Windows.Forms.Button btDataSave;
         private System.Windows.Forms.GroupBox gbMaker;
-        private System.Windows.Forms.OpenFileDialog ofdOpenPictureImage;
+        private System.Windows.Forms.OpenFileDialog ofdOpenData;
+        private System.Windows.Forms.SaveFileDialog sfdSaveData;
     }
 }
 

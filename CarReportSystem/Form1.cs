@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -25,7 +28,7 @@ namespace CarReportSystem {
 
             //記録者or車名が空白
             if(cbRecoder.Text == "" || cbCarName.Text == "") {
-                stringErrorMessage("記録者と車名を両方入力してください。");
+                displayErrorMessage("記録者と車名を両方入力してください。");
                 return;
             }
 
@@ -44,6 +47,10 @@ namespace CarReportSystem {
             cbItemsAdd(cbRecoder.Text, cbCarName.Text);
             //入力後テキストクリア
             textBoxesClear();
+            //ボタンを有効化
+            activationButton();
+            //選択解除
+            dgvCarReportData.ClearSelection();
 
         }
 
@@ -95,9 +102,9 @@ namespace CarReportSystem {
         //画像を開く
         private void btImageOpen_Click(object sender, EventArgs e) {
             {
-                if(ofdOpenPictureImage.ShowDialog() == DialogResult.OK) {
+                if(ofdOpenData.ShowDialog() == DialogResult.OK) {
                     //選択した画像をピクチャーボックスに表示
-                    pbCarImage.Image = Image.FromFile(ofdOpenPictureImage.FileName);
+                    pbCarImage.Image = Image.FromFile(ofdOpenData.FileName);
                     //ピクチャーボックスのサイズに画像を調整
                     pbCarImage.SizeMode = PictureBoxSizeMode.StretchImage;
                 }
@@ -122,6 +129,9 @@ namespace CarReportSystem {
             textBoxesClear();   //テキストボックスのクリア
             _CarReports.RemoveAt(dgvCarReportData.CurrentRow.Index);    //要素の削除
             dgvCarReportData.ClearSelection();  //選択解除
+            //ボタンの無効化を判断
+            invalidationButton();
+
         }
 
 
@@ -135,12 +145,12 @@ namespace CarReportSystem {
             CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
 
             getData(selectedCarReport);
-            
+
         }
 
 
         //エラーメッセージボックスの表示
-        private void stringErrorMessage(string textMessage) {
+        private void displayErrorMessage(string textMessage) {
             MessageBox.Show(textMessage,
                 "エラー",
                 MessageBoxButtons.OK,
@@ -150,6 +160,10 @@ namespace CarReportSystem {
 
         //データの修正
         private void btDataFix_Click(object sender, EventArgs e) {
+            if(dgvCarReportData.CurrentRow == null) {
+                return;
+            }
+
             CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
 
             //データをセット
@@ -205,6 +219,58 @@ namespace CarReportSystem {
             selectedCR.Name = cbCarName.Text;
             selectedCR.Report = tbReport.Text;
             selectedCR.Picture = pbCarImage.Image;
+        }
+
+
+        //セーブファイルダイアログを表示
+        private void btDataSave_Click(object sender, EventArgs e) {
+            if(sfdSaveData.ShowDialog() == DialogResult.OK) {
+                BinaryFormatter formatter = new BinaryFormatter();
+
+                //ファイルストリームを生成
+                using(FileStream fs = new FileStream(sfdSaveData.FileName, FileMode.Create)) {
+                    try {
+                        //シリアル化して保存
+                        formatter.Serialize(fs, _CarReports);
+                    } catch(SerializationException se) {
+                        Console.WriteLine("Failed to serialize. Reason: " + se.Message);
+                        throw;
+                    }
+                }
+            }
+        }
+
+        //オープンファイルダイアログを表示
+        private void btDataOpen_Click(object sender, EventArgs e) {
+            if(ofdOpenData.ShowDialog() == DialogResult.OK) {
+                using(FileStream fs = new FileStream(ofdOpenData.FileName, FileMode.Open)) {
+                    try {
+                        BinaryFormatter formatter = new BinaryFormatter();
+                        //逆シリアル化して読み込む
+                        _CarReports = (BindingList<CarReport>)formatter.Deserialize(fs);
+                        //データグリッドビューに再設定
+                        dgvCarReportData.DataSource = _CarReports;
+                        //選択されている箇所を各コントロールへ表示
+                        dgvCarReportData_Click(sender, e);
+                    } catch(SerializationException se) {
+                        Console.WriteLine("Failed to deserialize. Reason: " + se.Message);
+                        throw;
+                    }
+                }
+            }
+        }
+
+        //ボタンを有効化
+        private void activationButton() {
+            btDataClear.Enabled = true;
+            btDataFix.Enabled = true;
+        }
+
+        //ボタンを無効化
+        private void invalidationButton() {
+            //if(dgvCarReportData.CurrentRow.Index)
+            btDataClear.Enabled = false;
+            btDataFix.Enabled = false;
         }
     }
 }
