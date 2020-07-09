@@ -134,13 +134,14 @@ namespace CarReportSystem {
         //データの削除
         private void btDataClear_Click(object sender, EventArgs e) {
             if(dgvCarReportData.SelectedRows.Count == 0) {
+                displayErrorMessage("データを選択してください。");
                 return;
             }
             textBoxesClear();   //テキストボックスのクリア
             _CarReports.RemoveAt(dgvCarReportData.CurrentRow.Index);    //要素の削除
             dgvCarReportData.ClearSelection();  //選択解除
             //ボタンの無効化を判断
-            invalidationButton();
+            activationButton();
 
         }
 
@@ -148,6 +149,7 @@ namespace CarReportSystem {
         //データの修正
         private void btDataFix_Click(object sender, EventArgs e) {
             if(dgvCarReportData.SelectedRows.Count == 0) {
+                displayErrorMessage("データを選択してください。");
                 return;
             }
             CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
@@ -268,17 +270,15 @@ namespace CarReportSystem {
             }
         }
 
+
         //ボタンを有効化
         private void activationButton() {
-            btDataClear.Enabled = true;
-            btDataFix.Enabled = true;
-        }
-
-        //ボタンを無効化
-        private void invalidationButton() {
             if(dgvCarReportData.Rows.Count == 0) {
                 btDataClear.Enabled = false;
                 btDataFix.Enabled = false;
+            } else {
+                btDataClear.Enabled = true;
+                btDataFix.Enabled = true;
             }
         }
     }
