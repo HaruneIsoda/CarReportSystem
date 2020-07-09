@@ -215,12 +215,19 @@
             // 
             // dgvCarReportData
             // 
+            this.dgvCarReportData.AllowUserToAddRows = false;
+            this.dgvCarReportData.AllowUserToDeleteRows = false;
+            this.dgvCarReportData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.dgvCarReportData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarReportData.Location = new System.Drawing.Point(113, 270);
+            this.dgvCarReportData.MultiSelect = false;
             this.dgvCarReportData.Name = "dgvCarReportData";
+            this.dgvCarReportData.ReadOnly = true;
             this.dgvCarReportData.RowTemplate.Height = 21;
+            this.dgvCarReportData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCarReportData.Size = new System.Drawing.Size(632, 142);
             this.dgvCarReportData.TabIndex = 5;
+            this.dgvCarReportData.Click += new System.EventHandler(this.dgvCarReportData_Click);
             // 
             // label7
             // 
@@ -278,6 +285,7 @@
             this.btDataClear.TabIndex = 7;
             this.btDataClear.Text = "削除";
             this.btDataClear.UseVisualStyleBackColor = true;
+            this.btDataClear.Click += new System.EventHandler(this.btDataClear_Click);
             // 
             // btDataFix
             // 
@@ -287,6 +295,7 @@
             this.btDataFix.TabIndex = 7;
             this.btDataFix.Text = "修正";
             this.btDataFix.UseVisualStyleBackColor = true;
+            this.btDataFix.Click += new System.EventHandler(this.btDataFix_Click);
             // 
             // btEnd
             // 
@@ -364,7 +373,6 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "試乗レポート管理システム";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReportData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarImage)).EndInit();
             this.gbMaker.ResumeLayout(false);
