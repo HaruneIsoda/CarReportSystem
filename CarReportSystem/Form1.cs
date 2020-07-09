@@ -33,7 +33,7 @@ namespace CarReportSystem {
             }
 
             var carReport = new CarReport() {
-                CreatedDate = dtpDate.Value.Date,
+                CreatedDate = dtpDate.Value,
                 Recoder = cbRecoder.Text,
                 Maker = getRadioButton(),
                 Name = cbCarName.Text,
@@ -45,6 +45,8 @@ namespace CarReportSystem {
             _CarReports.Insert(0, carReport);
             //コンボボックスにアイテムを追加
             cbItemsAdd(cbRecoder.Text, cbCarName.Text);
+            //高さを自動調整
+            dgvCarReportData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             //入力後テキストクリア
             textBoxesClear();
             //ボタンを有効化
@@ -102,12 +104,17 @@ namespace CarReportSystem {
         //画像を開く
         private void btImageOpen_Click(object sender, EventArgs e) {
             {
-                if(ofdOpenData.ShowDialog() == DialogResult.OK) {
-                    //選択した画像をピクチャーボックスに表示
-                    pbCarImage.Image = Image.FromFile(ofdOpenData.FileName);
-                    //ピクチャーボックスのサイズに画像を調整
-                    pbCarImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                try {
+                    if(ofdOpenData.ShowDialog() == DialogResult.OK) {
+                        //選択した画像をピクチャーボックスに表示
+                        pbCarImage.Image = Image.FromFile(ofdOpenData.FileName);
+                        //ピクチャーボックスのサイズに画像を調整
+                        pbCarImage.SizeMode = PictureBoxSizeMode.StretchImage;
+                    }
+                } catch(OutOfMemoryException) {
+                    displayErrorMessage("画像ファイルを選択してください。");
                 }
+
             }
         }
 
@@ -126,12 +133,29 @@ namespace CarReportSystem {
 
         //データの削除
         private void btDataClear_Click(object sender, EventArgs e) {
+            if(dgvCarReportData.SelectedRows.Count == 0) {
+                return;
+            }
             textBoxesClear();   //テキストボックスのクリア
             _CarReports.RemoveAt(dgvCarReportData.CurrentRow.Index);    //要素の削除
             dgvCarReportData.ClearSelection();  //選択解除
             //ボタンの無効化を判断
             invalidationButton();
 
+        }
+
+
+        //データの修正
+        private void btDataFix_Click(object sender, EventArgs e) {
+            if(dgvCarReportData.SelectedRows.Count == 0) {
+                return;
+            }
+            CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
+
+            //データをセット
+            setData(selectedCarReport);
+            //リフレッシュ
+            dgvCarReportData.Refresh();
         }
 
 
@@ -145,7 +169,6 @@ namespace CarReportSystem {
             CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
 
             getData(selectedCarReport);
-
         }
 
 
@@ -155,21 +178,6 @@ namespace CarReportSystem {
                 "エラー",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error);
-        }
-
-
-        //データの修正
-        private void btDataFix_Click(object sender, EventArgs e) {
-            if(dgvCarReportData.CurrentRow == null) {
-                return;
-            }
-
-            CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
-
-            //データをセット
-            setData(selectedCarReport);
-            //リフレッシュ
-            dgvCarReportData.Refresh();
         }
 
 
@@ -234,7 +242,7 @@ namespace CarReportSystem {
                         formatter.Serialize(fs, _CarReports);
                     } catch(SerializationException se) {
                         Console.WriteLine("Failed to serialize. Reason: " + se.Message);
-                        throw;
+                        displayErrorMessage("保存時にエラーが発生しました。");
                     }
                 }
             }
@@ -254,7 +262,7 @@ namespace CarReportSystem {
                         dgvCarReportData_Click(sender, e);
                     } catch(SerializationException se) {
                         Console.WriteLine("Failed to deserialize. Reason: " + se.Message);
-                        throw;
+                        displayErrorMessage("読み込み時にエラーが発生しました。");
                     }
                 }
             }
@@ -268,9 +276,10 @@ namespace CarReportSystem {
 
         //ボタンを無効化
         private void invalidationButton() {
-            //if(dgvCarReportData.CurrentRow.Index)
-            btDataClear.Enabled = false;
-            btDataFix.Enabled = false;
+            if(dgvCarReportData.Rows.Count == 0) {
+                btDataClear.Enabled = false;
+                btDataFix.Enabled = false;
+            }
         }
     }
 }

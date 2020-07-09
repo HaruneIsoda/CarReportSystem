@@ -134,7 +134,7 @@
             this.cbCarName.Location = new System.Drawing.Point(113, 117);
             this.cbCarName.Name = "cbCarName";
             this.cbCarName.Size = new System.Drawing.Size(272, 20);
-            this.cbCarName.TabIndex = 2;
+            this.cbCarName.TabIndex = 4;
             // 
             // dtpDate
             // 
@@ -151,7 +151,7 @@
             this.rbToyota.Location = new System.Drawing.Point(6, 8);
             this.rbToyota.Name = "rbToyota";
             this.rbToyota.Size = new System.Drawing.Size(47, 16);
-            this.rbToyota.TabIndex = 3;
+            this.rbToyota.TabIndex = 0;
             this.rbToyota.TabStop = true;
             this.rbToyota.Text = "トヨタ";
             this.rbToyota.UseVisualStyleBackColor = true;
@@ -162,7 +162,7 @@
             this.rbNissan.Location = new System.Drawing.Point(58, 8);
             this.rbNissan.Name = "rbNissan";
             this.rbNissan.Size = new System.Drawing.Size(47, 16);
-            this.rbNissan.TabIndex = 3;
+            this.rbNissan.TabIndex = 1;
             this.rbNissan.Text = "日産";
             this.rbNissan.UseVisualStyleBackColor = true;
             // 
@@ -172,7 +172,7 @@
             this.rbHonda.Location = new System.Drawing.Point(110, 8);
             this.rbHonda.Name = "rbHonda";
             this.rbHonda.Size = new System.Drawing.Size(51, 16);
-            this.rbHonda.TabIndex = 3;
+            this.rbHonda.TabIndex = 2;
             this.rbHonda.Text = "ホンダ";
             this.rbHonda.UseVisualStyleBackColor = true;
             // 
@@ -192,7 +192,7 @@
             this.rbGaisya.Location = new System.Drawing.Point(223, 8);
             this.rbGaisya.Name = "rbGaisya";
             this.rbGaisya.Size = new System.Drawing.Size(47, 16);
-            this.rbGaisya.TabIndex = 3;
+            this.rbGaisya.TabIndex = 4;
             this.rbGaisya.Text = "外車";
             this.rbGaisya.UseVisualStyleBackColor = true;
             // 
@@ -202,7 +202,7 @@
             this.rbSonota.Location = new System.Drawing.Point(275, 8);
             this.rbSonota.Name = "rbSonota";
             this.rbSonota.Size = new System.Drawing.Size(54, 16);
-            this.rbSonota.TabIndex = 3;
+            this.rbSonota.TabIndex = 5;
             this.rbSonota.Text = "その他";
             this.rbSonota.UseVisualStyleBackColor = true;
             // 
@@ -212,7 +212,7 @@
             this.tbReport.Multiline = true;
             this.tbReport.Name = "tbReport";
             this.tbReport.Size = new System.Drawing.Size(333, 106);
-            this.tbReport.TabIndex = 4;
+            this.tbReport.TabIndex = 5;
             // 
             // dgvCarReportData
             // 
@@ -227,7 +227,7 @@
             this.dgvCarReportData.RowTemplate.Height = 21;
             this.dgvCarReportData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCarReportData.Size = new System.Drawing.Size(632, 142);
-            this.dgvCarReportData.TabIndex = 5;
+            this.dgvCarReportData.TabIndex = 0;
             this.dgvCarReportData.Click += new System.EventHandler(this.dgvCarReportData_Click);
             // 
             // label7
@@ -253,7 +253,7 @@
             this.btImageOpen.Location = new System.Drawing.Point(589, 27);
             this.btImageOpen.Name = "btImageOpen";
             this.btImageOpen.Size = new System.Drawing.Size(75, 23);
-            this.btImageOpen.TabIndex = 7;
+            this.btImageOpen.TabIndex = 6;
             this.btImageOpen.Text = "開く";
             this.btImageOpen.UseVisualStyleBackColor = true;
             this.btImageOpen.Click += new System.EventHandler(this.btImageOpen_Click);
@@ -273,7 +273,7 @@
             this.btDataAdd.Location = new System.Drawing.Point(474, 238);
             this.btDataAdd.Name = "btDataAdd";
             this.btDataAdd.Size = new System.Drawing.Size(75, 23);
-            this.btDataAdd.TabIndex = 7;
+            this.btDataAdd.TabIndex = 8;
             this.btDataAdd.Text = "追加";
             this.btDataAdd.UseVisualStyleBackColor = true;
             this.btDataAdd.Click += new System.EventHandler(this.btDataAdd_Click);
@@ -284,7 +284,7 @@
             this.btDataClear.Location = new System.Drawing.Point(670, 238);
             this.btDataClear.Name = "btDataClear";
             this.btDataClear.Size = new System.Drawing.Size(75, 23);
-            this.btDataClear.TabIndex = 7;
+            this.btDataClear.TabIndex = 10;
             this.btDataClear.Text = "削除";
             this.btDataClear.UseVisualStyleBackColor = true;
             this.btDataClear.Click += new System.EventHandler(this.btDataClear_Click);
@@ -295,7 +295,7 @@
             this.btDataFix.Location = new System.Drawing.Point(572, 238);
             this.btDataFix.Name = "btDataFix";
             this.btDataFix.Size = new System.Drawing.Size(75, 23);
-            this.btDataFix.TabIndex = 7;
+            this.btDataFix.TabIndex = 9;
             this.btDataFix.Text = "修正";
             this.btDataFix.UseVisualStyleBackColor = true;
             this.btDataFix.Click += new System.EventHandler(this.btDataFix_Click);
@@ -305,7 +305,7 @@
             this.btEnd.Location = new System.Drawing.Point(638, 418);
             this.btEnd.Name = "btEnd";
             this.btEnd.Size = new System.Drawing.Size(107, 23);
-            this.btEnd.TabIndex = 7;
+            this.btEnd.TabIndex = 13;
             this.btEnd.Text = "終了";
             this.btEnd.UseVisualStyleBackColor = true;
             this.btEnd.Click += new System.EventHandler(this.btEnd_Click);
@@ -315,7 +315,7 @@
             this.btDataOpen.Location = new System.Drawing.Point(38, 298);
             this.btDataOpen.Name = "btDataOpen";
             this.btDataOpen.Size = new System.Drawing.Size(69, 34);
-            this.btDataOpen.TabIndex = 7;
+            this.btDataOpen.TabIndex = 11;
             this.btDataOpen.Text = "開く";
             this.btDataOpen.UseVisualStyleBackColor = true;
             this.btDataOpen.Click += new System.EventHandler(this.btDataOpen_Click);
@@ -325,7 +325,7 @@
             this.btDataSave.Location = new System.Drawing.Point(39, 338);
             this.btDataSave.Name = "btDataSave";
             this.btDataSave.Size = new System.Drawing.Size(69, 34);
-            this.btDataSave.TabIndex = 7;
+            this.btDataSave.TabIndex = 12;
             this.btDataSave.Text = "保存";
             this.btDataSave.UseVisualStyleBackColor = true;
             this.btDataSave.Click += new System.EventHandler(this.btDataSave_Click);
@@ -341,7 +341,7 @@
             this.gbMaker.Location = new System.Drawing.Point(113, 82);
             this.gbMaker.Name = "gbMaker";
             this.gbMaker.Size = new System.Drawing.Size(333, 29);
-            this.gbMaker.TabIndex = 8;
+            this.gbMaker.TabIndex = 3;
             this.gbMaker.TabStop = false;
             // 
             // ofdOpenData
@@ -377,7 +377,6 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
-            this.Text = "試乗レポート管理システム";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCarReportData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbCarImage)).EndInit();
             this.gbMaker.ResumeLayout(false);
