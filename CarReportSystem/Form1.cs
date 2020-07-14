@@ -19,7 +19,7 @@ namespace CarReportSystem {
 
         public Form1() {
             InitializeComponent();
-            dgvCarReportData.DataSource = _CarReports;
+            //dgvCarReportData.DataSource = _CarReports;
         }
 
 
@@ -27,14 +27,14 @@ namespace CarReportSystem {
         private void btDataAdd_Click(object sender, EventArgs e) {
 
             //記録者or車名が空白
-            if(cbRecoder.Text == "" || cbCarName.Text == "") {
+            if(cbAuthor.Text == "" || cbCarName.Text == "") {
                 displayErrorMessage("記録者と車名を両方入力してください。");
                 return;
             }
 
             var carReport = new CarReport() {
                 CreatedDate = dtpDate.Value,
-                Recoder = cbRecoder.Text,
+                Author = cbAuthor.Text,
                 Maker = getRadioButton(),
                 Name = cbCarName.Text,
                 Report = tbReport.Text,
@@ -44,7 +44,7 @@ namespace CarReportSystem {
             //リストに追加
             _CarReports.Insert(0, carReport);
             //コンボボックスにアイテムを追加
-            cbItemsAdd(cbRecoder.Text, cbCarName.Text);
+            cbItemsAdd(cbAuthor.Text, cbCarName.Text);
             //高さを自動調整
             dgvCarReportData.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             //入力後テキストクリア
@@ -60,7 +60,7 @@ namespace CarReportSystem {
         //テキストのクリア
         private void textBoxesClear() {
             dtpDate.Value = DateTime.Today;
-            cbRecoder.Text = "";
+            cbAuthor.Text = "";
             rbToyota.Checked = true;
             cbCarName.Text = "";
             tbReport.Text = "";
@@ -71,8 +71,8 @@ namespace CarReportSystem {
         //コンボボックスにアイテムを追加
         private void cbItemsAdd(string recoderItem, string nameItem) {
             //記録者のアイテム登録
-            if(!cbRecoder.Items.Contains(recoderItem)) {
-                cbRecoder.Items.Add(recoderItem);
+            if(!cbAuthor.Items.Contains(recoderItem)) {
+                cbAuthor.Items.Add(recoderItem);
             }
             //車名のアイテム登録
             if(!cbCarName.Items.Contains(nameItem)) {
@@ -163,14 +163,42 @@ namespace CarReportSystem {
 
         //データグリッドビューを選択
         private void dgvCarReportData_Click(object sender, EventArgs e) {
-            //データがなかった場合
-            if(dgvCarReportData.CurrentRow == null) {
-                return;
+            ////データがなかった場合
+            //if(dgvCarReportData.CurrentRow == null) {
+            //    return;
+            //}
+
+            //CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
+
+            //getData(selectedCarReport);
+
+
+            //ラジオボタン
+            switch(dgvCarReportData.CurrentRow.Cells[3].Value) {
+                case "DEFAULT":
+                    break;
+                case "トヨタ":
+                    rbToyota.Checked = true;
+                    break;
+                case "日産":
+                    rbNissan.Checked = true;
+                    break;
+                case "ホンダ":
+                    rbHonda.Checked = true;
+                    break;
+                case "スバル":
+                    rbSubaru.Checked = true;
+                    break;
+                case "外車":
+                    rbGaisya.Checked = true;
+                    break;
+                case "その他":
+                    rbSonota.Checked = true;
+                    break;
+                default:
+                    rbSonota.Checked = true;
+                    break;
             }
-
-            CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
-
-            getData(selectedCarReport);
         }
 
 
@@ -187,7 +215,7 @@ namespace CarReportSystem {
         private void getData(CarReport selectedCR) {
 
             dtpDate.Value = selectedCR.CreatedDate;
-            cbRecoder.Text = selectedCR.Recoder;
+            cbAuthor.Text = selectedCR.Author;
             cbCarName.Text = selectedCR.Name;
             tbReport.Text = selectedCR.Report;
             pbCarImage.Image = selectedCR.Picture;
@@ -224,7 +252,7 @@ namespace CarReportSystem {
         private void setData(CarReport selectedCR) {
 
             selectedCR.CreatedDate = dtpDate.Value;
-            selectedCR.Recoder = cbRecoder.Text;
+            selectedCR.Author = cbAuthor.Text;
             selectedCR.Maker = getRadioButton();
             selectedCR.Name = cbCarName.Text;
             selectedCR.Report = tbReport.Text;
@@ -280,6 +308,15 @@ namespace CarReportSystem {
                 btDataClear.Enabled = true;
                 btDataFix.Enabled = true;
             }
+        }
+
+        private void 接続ToolStripMenuItem_Click(object sender, EventArgs e) {
+            this.carReportTableAdapter.Fill(this.infosys202006DataSet.CarReport);
+        }
+
+        private void Form1_Load(object sender, EventArgs e) {
+            //IDを非表示にする
+            dgvCarReportData.Columns[0].Visible = false;
         }
     }
 }

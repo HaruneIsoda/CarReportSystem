@@ -16,7 +16,7 @@ namespace CarReportSystem {
         public DateTime CreatedDate { get; set; }
         //記録者
         [System.ComponentModel.DisplayName("記録者")]
-        public string Recoder { get; set; }
+        public string Author { get; set; }
         //メーカー
         [System.ComponentModel.DisplayName("メーカー")]
         public CarMaker Maker { get; set; }
