@@ -163,14 +163,11 @@ namespace CarReportSystem {
 
         //データグリッドビューを選択
         private void dgvCarReportData_Click(object sender, EventArgs e) {
-            ////データがなかった場合
-            //if(dgvCarReportData.CurrentRow == null) {
-            //    return;
-            //}
 
-            //CarReport selectedCarReport = _CarReports[dgvCarReportData.CurrentRow.Index];
-
-            //getData(selectedCarReport);
+            //データがなかった場合
+            if(dgvCarReportData.CurrentRow == null) {
+                return;
+            }
 
 
             //ラジオボタン
