@@ -55,17 +55,17 @@ namespace CarReportSystem {
         private string getRadioButton() {
 
             if(rbToyota.Checked) {
-                return rbToyota.Name;
+                return rbToyota.Text;
             } else if(rbNissan.Checked) {
-                return rbNissan.Name;
+                return rbNissan.Text;
             } else if(rbHonda.Checked) {
-                return rbHonda.Name;
+                return rbHonda.Text;
             } else if(rbSubaru.Checked) {
-                return rbSubaru.Name;
+                return rbSubaru.Text;
             } else if(rbGaisya.Checked) {
-                return rbGaisya.Name;
+                return rbGaisya.Text;
             } else if(rbSonota.Checked) {
-                return rbSonota.Name;
+                return rbSonota.Text;
             } else {
                 return "null";
             }
@@ -117,19 +117,29 @@ namespace CarReportSystem {
         //データの修正
         private void btDataFix_Click(object sender, EventArgs e) {
 
-            dgvCarReportData.CurrentRow.Cells[1].Value = dtpDate;
-            dgvCarReportData.CurrentRow.Cells[2].Value = cbAuthor;
-            dgvCarReportData.CurrentRow.Cells[3].Value = "";
-            dgvCarReportData.CurrentRow.Cells[4].Value = cbCarName;
-            dgvCarReportData.CurrentRow.Cells[5].Value = tbReport;
+            //nullを許容していないものに値が入っていない場合
+            if(cbAuthor.Text == "" || cbCarName.Text == "") {
+                displayErrorMessage("記録者と車名を入力してください。");
+                return;
+            }
 
-            var imageByte = ImageToByteArray(pbCarImage.Image);
-            dgvCarReportData.CurrentRow.Cells[6].Value = imageByte;
+            dgvCarReportData.CurrentRow.Cells[1].Value = dtpDate.Value.Date;
+            dgvCarReportData.CurrentRow.Cells[2].Value = cbAuthor.Text;
+            dgvCarReportData.CurrentRow.Cells[3].Value = getRadioButton();
+            dgvCarReportData.CurrentRow.Cells[4].Value = cbCarName.Text;
+            dgvCarReportData.CurrentRow.Cells[5].Value = tbReport.Text;
 
-            //データベース反映
-            this.Validate();
-            this.carReportBindingSource.EndEdit();
-            this.tableAdapterManager.UpdateAll(this.infosys202006DataSet);
+            if(pbCarImage.Image == null) {
+                dgvCarReportData.CurrentRow.Cells[6].Value = null;
+
+            } else {
+                var imageByte = ImageToByteArray(pbCarImage.Image);
+                dgvCarReportData.CurrentRow.Cells[6].Value = imageByte;
+            }
+
+
+            //反映
+            DatabaseSave();
 
         }
 
@@ -168,6 +178,29 @@ namespace CarReportSystem {
                     rbSonota.Checked = true;
                     break;
             }
+
+
+            //テキストボックス等に表示
+            if(dgvCarReportData.CurrentRow.Cells[1].Value.ToString() == "") {
+                dtpDate.Value = DateTime.Today;
+            } else {
+                dtpDate.Value = (DateTime)dgvCarReportData.CurrentRow.Cells[1].Value;
+            }
+            cbAuthor.Text = dgvCarReportData.CurrentRow.Cells[2].Value.ToString();
+            cbCarName.Text = dgvCarReportData.CurrentRow.Cells[4].Value.ToString();
+            tbReport.Text = dgvCarReportData.CurrentRow.Cells[5].Value.ToString();
+
+            if(dgvCarReportData.CurrentRow.Cells[6].Value.ToString() == "") {
+                pbCarImage.Image = null;
+            } else {
+                var byteArray = (byte[])dgvCarReportData.CurrentRow.Cells[6].Value;
+                pbCarImage.Image = ByteArrayToImage(byteArray);
+            }
+
+            //ピクチャーボックスのサイズに画像を調整
+            pbCarImage.SizeMode = PictureBoxSizeMode.StretchImage;
+
+
         }
 
 
@@ -291,8 +324,17 @@ namespace CarReportSystem {
         private void 接続ToolStripMenuItem_Click(object sender, EventArgs e) {
             this.carReportTableAdapter.Fill(this.infosys202006DataSet.CarReport);
 
+
+            //コンボボックスにアイテムを追加
+            for(int i = 0; i < dgvCarReportData.RowCount; i++) {
+                cbItemsAdd(dgvCarReportData.Rows[i].Cells[2].Value.ToString(), dgvCarReportData.Rows[i].Cells[4].Value.ToString());
+            }
+
             //ボタンの有効化
             activationButton();
+            //選択解除
+            dgvCarReportData.ClearSelection();
+
         }
 
 
@@ -316,6 +358,14 @@ namespace CarReportSystem {
             ImageConverter imgconv = new ImageConverter();
             byte[] byteData = (byte[])imgconv.ConvertTo(img, typeof(byte[]));
             return byteData;
+        }
+
+
+        //データベース反映
+        private void DatabaseSave() {
+            this.Validate();
+            this.carReportBindingSource.EndEdit();
+            this.tableAdapterManager.UpdateAll(this.infosys202006DataSet);
         }
     }
 }

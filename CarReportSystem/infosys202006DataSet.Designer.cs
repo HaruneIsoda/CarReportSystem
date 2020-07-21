@@ -947,10 +947,9 @@ namespace CarReportSystem.infosys202006DataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Report", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Report", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[CarReport] ([id], [CreatedDate], [Author], [Maker], [Name], [Report], [Picture]) VALUES (@id, @CreatedDate, @Author, @Maker, @Name, @Report, @Picture);
-SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHERE (id = @id)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[CarReport] ([CreatedDate], [Author], [Maker], [Name], [Report], [Picture]) VALUES (@CreatedDate, @Author, @Maker, @Name, @Report, @Picture);
+SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHERE (id = SCOPE_IDENTITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Author", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Author", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Maker", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Maker", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -959,10 +958,9 @@ SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHER
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Picture", global::System.Data.SqlDbType.Image, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Picture", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CarReport] SET [id] = @id, [CreatedDate] = @CreatedDate, [Author] = @Author, [Maker] = @Maker, [Name] = @Name, [Report] = @Report, [Picture] = @Picture WHERE (([id] = @Original_id) AND ([CreatedDate] = @Original_CreatedDate) AND ([Author] = @Original_Author) AND ((@IsNull_Maker = 1 AND [Maker] IS NULL) OR ([Maker] = @Original_Maker)) AND ([Name] = @Original_Name) AND ((@IsNull_Report = 1 AND [Report] IS NULL) OR ([Report] = @Original_Report)));
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[CarReport] SET [CreatedDate] = @CreatedDate, [Author] = @Author, [Maker] = @Maker, [Name] = @Name, [Report] = @Report, [Picture] = @Picture WHERE (([id] = @Original_id) AND ([CreatedDate] = @Original_CreatedDate) AND ([Author] = @Original_Author) AND ((@IsNull_Maker = 1 AND [Maker] IS NULL) OR ([Maker] = @Original_Maker)) AND ([Name] = @Original_Name) AND ((@IsNull_Report = 1 AND [Report] IS NULL) OR ([Report] = @Original_Report)));
 SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@CreatedDate", global::System.Data.SqlDbType.Date, 0, global::System.Data.ParameterDirection.Input, 0, 0, "CreatedDate", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Author", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Author", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Maker", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Maker", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -977,6 +975,7 @@ SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHER
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Report", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Report", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Report", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Report", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1104,38 +1103,37 @@ SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHER
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int id, System.DateTime CreatedDate, string Author, string Maker, string Name, string Report, byte[] Picture) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(id));
-            this.Adapter.InsertCommand.Parameters[1].Value = ((System.DateTime)(CreatedDate));
+        public virtual int Insert(System.DateTime CreatedDate, string Author, string Maker, string Name, string Report, byte[] Picture) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((System.DateTime)(CreatedDate));
             if ((Author == null)) {
                 throw new global::System.ArgumentNullException("Author");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Author));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Author));
             }
             if ((Maker == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Maker));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Maker));
             }
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Name));
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(Name));
             }
             if ((Report == null)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(Report));
+            }
+            if ((Picture == null)) {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(Report));
-            }
-            if ((Picture == null)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((byte[])(Picture));
+                this.Adapter.InsertCommand.Parameters[5].Value = ((byte[])(Picture));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -1157,69 +1155,69 @@ SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHER
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int id, System.DateTime CreatedDate, string Author, string Maker, string Name, string Report, byte[] Picture, int Original_id, System.DateTime Original_CreatedDate, string Original_Author, string Original_Maker, string Original_Name, string Original_Report) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(id));
-            this.Adapter.UpdateCommand.Parameters[1].Value = ((System.DateTime)(CreatedDate));
+        public virtual int Update(System.DateTime CreatedDate, string Author, string Maker, string Name, string Report, byte[] Picture, int Original_id, System.DateTime Original_CreatedDate, string Original_Author, string Original_Maker, string Original_Name, string Original_Report, int id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((System.DateTime)(CreatedDate));
             if ((Author == null)) {
                 throw new global::System.ArgumentNullException("Author");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Author));
+                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Author));
             }
             if ((Maker == null)) {
-                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Maker));
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Maker));
             }
             if ((Name == null)) {
                 throw new global::System.ArgumentNullException("Name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Name));
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(Name));
             }
             if ((Report == null)) {
+                this.Adapter.UpdateCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Report));
+            }
+            if ((Picture == null)) {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Report));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((byte[])(Picture));
             }
-            if ((Picture == null)) {
-                this.Adapter.UpdateCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((byte[])(Picture));
-            }
-            this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Original_id));
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((System.DateTime)(Original_CreatedDate));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_id));
+            this.Adapter.UpdateCommand.Parameters[7].Value = ((System.DateTime)(Original_CreatedDate));
             if ((Original_Author == null)) {
                 throw new global::System.ArgumentNullException("Original_Author");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Author));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_Author));
             }
             if ((Original_Maker == null)) {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Maker));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_Maker));
             }
             if ((Original_Name == null)) {
                 throw new global::System.ArgumentNullException("Original_Name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_Name));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_Name));
             }
             if ((Original_Report == null)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_Report));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_Report));
             }
+            this.Adapter.UpdateCommand.Parameters[14].Value = ((int)(id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -1241,7 +1239,7 @@ SELECT id, CreatedDate, Author, Maker, Name, Report, Picture FROM CarReport WHER
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
         public virtual int Update(System.DateTime CreatedDate, string Author, string Maker, string Name, string Report, byte[] Picture, int Original_id, System.DateTime Original_CreatedDate, string Original_Author, string Original_Maker, string Original_Name, string Original_Report) {
-            return this.Update(Original_id, CreatedDate, Author, Maker, Name, Report, Picture, Original_id, Original_CreatedDate, Original_Author, Original_Maker, Original_Name, Original_Report);
+            return this.Update(CreatedDate, Author, Maker, Name, Report, Picture, Original_id, Original_CreatedDate, Original_Author, Original_Maker, Original_Name, Original_Report, Original_id);
         }
     }
     
