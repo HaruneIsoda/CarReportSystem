@@ -310,7 +310,7 @@
             // 
             // btEnd
             // 
-            this.btEnd.Location = new System.Drawing.Point(638, 590);
+            this.btEnd.Location = new System.Drawing.Point(638, 502);
             this.btEnd.Name = "btEnd";
             this.btEnd.Size = new System.Drawing.Size(107, 23);
             this.btEnd.TabIndex = 14;
@@ -362,7 +362,7 @@
             this.ファイルToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1101, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1065, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -386,7 +386,6 @@
             this.dgvCarReportData.AllowUserToAddRows = false;
             this.dgvCarReportData.AllowUserToDeleteRows = false;
             this.dgvCarReportData.AutoGenerateColumns = false;
-            this.dgvCarReportData.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvCarReportData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCarReportData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
@@ -404,7 +403,7 @@
             this.dgvCarReportData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.dgvCarReportData.RowTemplate.Height = 30;
             this.dgvCarReportData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCarReportData.Size = new System.Drawing.Size(660, 314);
+            this.dgvCarReportData.Size = new System.Drawing.Size(660, 226);
             this.dgvCarReportData.TabIndex = 0;
             this.dgvCarReportData.Click += new System.EventHandler(this.dgvCarReportData_Click);
             // 
@@ -490,7 +489,7 @@
             this.groupBox1.Controls.Add(this.tbSearchCarAuthor);
             this.groupBox1.Controls.Add(this.tbSearchCarName);
             this.groupBox1.Controls.Add(this.tbSearchCarMaker);
-            this.groupBox1.Location = new System.Drawing.Point(801, 46);
+            this.groupBox1.Location = new System.Drawing.Point(769, 32);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(275, 218);
             this.groupBox1.TabIndex = 13;
@@ -611,7 +610,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1101, 618);
+            this.ClientSize = new System.Drawing.Size(1065, 534);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dgvCarReportData);
             this.Controls.Add(this.gbMaker);
