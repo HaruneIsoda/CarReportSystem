@@ -297,38 +297,26 @@ namespace CarReportSystem {
         }
 
 
-
-        //セットデータ
-        //private void setData(CarReport selectedCR) {
-
-        //    selectedCR.CreatedDate = dtpDate.Value;
-        //    selectedCR.Author = cbAuthor.Text;
-        //    selectedCR.Maker = getRadioButton();
-        //    selectedCR.Name = cbCarName.Text;
-        //    selectedCR.Report = tbReport.Text;
-        //    selectedCR.Picture = pbCarImage.Image;
-        //}
-
-
         //セーブファイルダイアログを表示
         private void btDataSave_Click(object sender, EventArgs e) {
 
             displayErrorMessage("保存できないよ。");
 
-            if(sfdSaveData.ShowDialog() == DialogResult.OK) {
-                BinaryFormatter formatter = new BinaryFormatter();
 
-                //ファイルストリームを生成
-                using(FileStream fs = new FileStream(sfdSaveData.FileName, FileMode.Create)) {
-                    try {
-                        //シリアル化して保存
-                        formatter.Serialize(fs, dgvCarReportData);
-                    } catch(SerializationException se) {
-                        Console.WriteLine("Failed to serialize. Reason: " + se.Message);
-                        displayErrorMessage("保存時にエラーが発生しました。");
-                    }
-                }
-            }
+            //if(sfdSaveData.ShowDialog() == DialogResult.OK) {
+            //    BinaryFormatter formatter = new BinaryFormatter();
+
+            //    //ファイルストリームを生成
+            //    using(FileStream fs = new FileStream(sfdSaveData.FileName, FileMode.Create)) {
+            //        try {
+            //            //シリアル化して保存
+            //            formatter.Serialize(fs, dgvCarReportData);
+            //        } catch(SerializationException se) {
+            //            Console.WriteLine("Failed to serialize. Reason: " + se.Message);
+            //            displayErrorMessage("保存時にエラーが発生しました。");
+            //        }
+            //    }
+            //}
         }
 
 
@@ -336,7 +324,7 @@ namespace CarReportSystem {
         //オープンファイルダイアログを表示
         private void btDataOpen_Click(object sender, EventArgs e) {
 
-            //    displayErrorMessage("ファイル開けないよ。");
+            displayErrorMessage("ファイル開けないよ。");
 
             //    if(ofdOpenData.ShowDialog() == DialogResult.OK) {
             //        using(FileStream fs = new FileStream(ofdOpenData.FileName, FileMode.Open)) {
@@ -426,15 +414,14 @@ namespace CarReportSystem {
         //実行クリック
         private void btSearchExe_Click(object sender, EventArgs e) {
 
-            var date = dtpSearchCarDate.Value.Date.ToString();
-            date = date.Substring(0, 4) + "-" + date.Substring(5, 2) + "-" + date.Substring(8, 2);
+            var date = dtpSearchCarDate.Text;
             var author = tbSearchCarAuthor.Text;
             var maker = tbSearchCarMaker.Text;
             var name = tbSearchCarName.Text;
 
             //データが入っていなかった場合
             if(cbDateCheck.Checked == true) {
-                date = "1000-01-01"; //ありえない数を入れて検索に引っかからないようにする
+                date = "1000/01/01"; //ありえない数を入れて検索に引っかからないようにする
             }
             if(tbSearchCarAuthor.Text == "") {
                 author = "null";
@@ -450,11 +437,17 @@ namespace CarReportSystem {
             //ラジオボタンを押したほうの処理
             if(rbOr.Checked == true) {
                 this.carReportTableAdapter.FillByOrSearchButton
-                    (infosys202006DataSet.CarReport, date, author,maker, name);
+                    (infosys202006DataSet.CarReport, date, author, maker, name);
             } else if(rbAnd.Checked == true) {
                 this.carReportTableAdapter.FillByAndSearchButton
                     (infosys202006DataSet.CarReport, date, author, maker, name);
             }
+            
+            //ボタンの有効化
+            activationButton();
+            //選択解除
+            dgvCarReportData.ClearSelection();
+
         }
 
         private void cbDateCheck_CheckedChanged(object sender, EventArgs e) {
